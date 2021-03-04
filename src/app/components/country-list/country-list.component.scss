@@ -1,0 +1,91 @@
+$primary : #3f51b5;
+.wrapper {
+    max-height: 669px;
+    overflow-y: auto;
+    margin: 20px;
+    overflow-x: hidden;
+    border: 1px solid #dfdfdf;
+    box-shadow: 0 0;
+    table {
+        width:100%;
+        .mat-header-cell {
+            color: #000;
+            font-weight: 600;
+            font-size: 16px;
+            span{
+                text-transform: capitalize;
+            }
+        }
+        tr{
+            td{
+                .flag{
+                    width: 40px;
+                    height: 27px;
+                    display: block;
+                    img{
+                        width: 100%;
+                    }
+                }
+
+            }
+            &:nth-child(even){
+                background-color:#f2f2f2;
+            }
+            &:nth-child(odd){
+                background-color:#fff ;
+            }
+            &:hover{
+                cursor: pointer;
+                td{
+                    background-color: $primary;
+                    color: #fff;
+                    opacity:0.7;
+                    font-weight: 600;
+                }
+            }
+        }
+    }
+    .heading {
+        display: flex;
+        align-items: center;
+        padding: 10px 24px;
+        .title{
+            display: flex;
+            .mat-icon {
+                border: 1px solid $primary;
+                color:$primary;
+            }
+            h2{
+                text-align: center;
+                color: $primary;
+                margin: 0 0 0 15px;
+            }
+        }
+        >div{
+            flex: 1;
+            &:last-child{
+                justify-content: flex-end;
+                display: flex;
+                .mat-form-field {
+                    width: 56%;
+                }
+            }
+        }
+        
+    }
+}
+context-menu-content {
+    background:red!important;
+    div {
+        background-color: blue;
+    }
+    ul{
+        background: #fff;
+        box-shadow: 0 0 5px #000;
+        background: #ccc;
+        padding: 15px;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+}

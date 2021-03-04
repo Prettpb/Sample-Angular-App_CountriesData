@@ -1,0 +1,22 @@
+.wrapper {
+    margin: 30px;
+}
+
+.mat-icon {
+    vertical-align: bottom;
+    margin-right: 5px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.mat-card-content {
+    img {
+        height: 400px;
+    }
+}
+
+.mat-card-footer {
+    margin: 10px;
+}

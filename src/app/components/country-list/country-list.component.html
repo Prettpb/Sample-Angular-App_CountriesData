@@ -1,0 +1,60 @@
+<div class="mat-elevation-z8 data-container wrapper">
+    <div class="heading">
+        <div class="title">
+            <mat-icon aria-hidden="false" [matMenuTriggerFor]="menu" (click)="menuHandler()">menu</mat-icon>
+            <mat-menu #menu="matMenu" (closed)="menuClosed()">
+                <button mat-menu-item (click)="export('pdf')">
+                    <mat-icon>cloud_download</mat-icon>
+                    <span>Export To PDF</span>
+                </button>
+                <button mat-menu-item (click)="export('png')">
+                    <mat-icon>cloud_download</mat-icon>
+                    <span>Export To PNG</span>
+                </button>
+                <button mat-menu-item (click)="export('xls')">
+                    <mat-icon>cloud_download</mat-icon>
+                    <span>Export To EXCEL</span>
+                </button>
+            </mat-menu>
+            <div><h2>COUNTRIES DATA LIST</h2></div>
+        </div>
+        
+        <div class="search-wrapper">
+            <mat-form-field>
+                <mat-label>Search</mat-label>
+                <input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+            </mat-form-field>
+        </div>
+    </div>
+
+    <table mat-table [dataSource]="dataSource$" matSort id="dataList">       
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="['/country', row.alpha2Code]" (click)="showDetails(row.alpha2Code)"></tr>
+
+        <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header><span>{{column}}</span> </th>
+            <td mat-cell *matCellDef="let element" [contextMenu]="basicMenu" [contextMenuSubject]="{column: column, value: element[column]}">
+                <span *ngIf="column=='flag'" class="flag">
+                    <img src="{{element[column]}}" />
+                </span>
+                <span *ngIf="column!='flag'">
+                    {{element[column]}}
+                </span>
+            </td>
+        </ng-container>
+    </table>
+
+    <mat-paginator [length]="100"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+</div>
+
+<context-menu>
+    <ng-template contextMenuItem (execute)="handleContextMenu($event, 'removeColumn')">
+        Remove Column
+    </ng-template>
+    <ng-template contextMenuItem (execute)="handleContextMenu($event, 'addColumn', column)" *ngFor="let column of deletedColumns">
+        Add Column ( {{column | uppercase}} )
+    </ng-template>
+</context-menu>
